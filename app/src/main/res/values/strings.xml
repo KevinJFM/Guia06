@@ -1,0 +1,24 @@
+<resources>
+    <string name="app_name">KevinFlores</string>
+    <string name="default_web_client_id" translatable="false">468699840923-g9qq0ksdbfh637ljoiafgueai6mlrf08.apps.googleusercontent.com</string>
+
+    // for login
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in">Entrar</string>
+    <string name="action_sign_in_short" translatable="false">Entrar</string>
+    <string name="action_sign_up">Entrar</string>
+    <string name="error_invalid_email">Esta dirección de correo electrónico no es válida</string>
+    <string name="error_invalid_password">Este password es pequeño</string>
+    <string name="error_incorrect_email_password">Email o password son incorrectos</string>
+    <string name="sign_up_free">¿Aún no eres miembro? ¡Regístrate gratis!</string>
+    <string name="create_account">Crear Cuenta</string>
+    <string name="sign_in_free">¿Ya te resgistraste? Entrar</string>
+    <string name="authenticating">Autenticando...</string>
+    <string name="confirm_email">Confirmar Email</string>
+    <string name="please_confirm_email">Porfavor confirme su email (%s) o crea una cuenta</string>
+    <string name="user_login_successful">Login exitosamente Entrar</string>
+    <string name="ok">Ok</string>
+    <string name="cancel">Cancelar</string>
+    <string name="action_logout">Salir</string>
+</resources>

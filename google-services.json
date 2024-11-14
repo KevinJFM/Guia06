@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "468699840923",
+    "project_id": "loginproject-bc282",
+    "storage_bucket": "loginproject-bc282.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:468699840923:android:11e4034638e3252073a13e",
+        "android_client_info": {
+          "package_name": "com.kevin.loginproject"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "468699840923-jhqot9mmkpqneul255qlb8r51h0u624p.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.kevin.loginproject",
+            "certificate_hash": "2e475ce89c3afd78c64baadf89135b98036f2cdf"
+          }
+        },
+        {
+          "client_id": "468699840923-g9qq0ksdbfh637ljoiafgueai6mlrf08.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDK1LNyMS8PB_sOlYCJl3THl9LFJm1Jzn0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "468699840923-g9qq0ksdbfh637ljoiafgueai6mlrf08.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
