@@ -53,20 +53,30 @@ public class loginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        // Inicializa las vistas de la interfaz de usuario (EditTexts, Buttons, etc.)
         initViews();
+
+        // Configura los listeners para manejar los eventos de clic y otras interacciones
         setListeners();
 
+        // Obtiene la instancia de FirebaseAuth para manejar la autenticación del usuario
         mAuth = FirebaseAuth.getInstance();
 
+        // Configura las opciones de inicio de sesión con Google
         configureGoogleSignIn();
 
+        // Registra el launcher para manejar el resultado de la actividad de inicio de sesión con Google
         signInLauncher = registerForActivityResult(
                 new ActivityResultContracts.StartActivityForResult(),
                 result -> {
+                    // Verifica si el resultado de la actividad es exitoso
                     if (result.getResultCode() == Activity.RESULT_OK) {
+                        // Obtiene la cuenta de Google del resultado de la actividad
                         Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(result.getData());
                         try {
+                            // Si la tarea es exitosa, obtiene la cuenta de Google
                             GoogleSignInAccount account = task.getResult(ApiException.class);
+                            // Llama al método para autenticar en Firebase usando la cuenta de Google
                             firebaseAuthWithGoogle(account);
                         } catch (ApiException e) {
                             Toast.makeText(this, "Error al iniciar sesión con Google", Toast.LENGTH_SHORT).show();
@@ -75,15 +85,21 @@ public class loginActivity extends AppCompatActivity {
                     }
                 });
 
+        // Obtiene la instancia de FirebaseAuth para manejar la autenticación
         mAuth = FirebaseAuth.getInstance();
 
+        // Configura las opciones de inicio de sesión con Google
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                // Solicita el token de ID para autenticar con Firebase (utiliza el ID de cliente de tu proyecto)
                 .requestIdToken(getString(R.string.default_web_client_id))
+                // Solicita el correo electrónico del usuario como parte de la autenticación
                 .requestEmail()
                 .build();
 
+        // Inicializa el cliente de Google para el inicio de sesión, usando la configuración 'gso'
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
 
+        // Configura el botón de inicio de sesión con Google
         btngoogleButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -105,6 +121,7 @@ public class loginActivity extends AppCompatActivity {
         finish();
     }
 
+    // Inicializa las vistas (componentes de la interfaz de usuario)
     private void initViews() {
         etEmail = findViewById(R.id.etEmail);
         etPassword = findViewById(R.id.etPassword);
@@ -177,10 +194,14 @@ public class loginActivity extends AppCompatActivity {
             return; // Salir si no hay conexión
         }
 
+        // Verifica si el resultado corresponde a la solicitud de inicio de sesión con Google
         if (requestCode == RC_SIGN_IN) {
+            // Verifica si el resultado corresponde a la solicitud de inicio de sesión con Google
             Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
             try {
+                // Obtiene la cuenta de Google si la tarea es exitosa
                 GoogleSignInAccount account = task.getResult(ApiException.class);
+                // Autentica al usuario en Firebase usando el token de la cuenta de Google
                 firebaseAuthWithGoogle(account.getIdToken());
             } catch (ApiException e) {
                 Toast.makeText(this, "Error de autenticación: " + e.getMessage(), Toast.LENGTH_SHORT).show();
@@ -188,18 +209,24 @@ public class loginActivity extends AppCompatActivity {
         }
     }
 
+    // Método para verificar si el dispositivo está conectado a internet
     private boolean isNetworkConnected() {
         ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
         return activeNetwork != null && activeNetwork.isConnectedOrConnecting();
     }
 
+    // Método para autenticar al usuario en Firebase utilizando el token de Google
     private void firebaseAuthWithGoogle(String idToken) {
+        // Crea las credenciales de autenticación usando el token de Google
         AuthCredential credential = GoogleAuthProvider.getCredential(idToken, null);
+
+        // Inicia sesión en Firebase con las credenciales obtenidas
         mAuth.signInWithCredential(credential)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
+                        // Verifica si la autenticación fue exitosa
                         if (task.isSuccessful()) {
                             irHome();
                         } else {
